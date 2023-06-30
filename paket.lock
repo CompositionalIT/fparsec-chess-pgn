@@ -1,0 +1,18 @@
+STORAGE: NONE
+RESTRICTION: == net6.0
+NUGET
+  remote: https://api.nuget.org/v3/index.json
+    Expecto (10.1)
+      FSharp.Core (>= 7.0.200)
+      Mono.Cecil (>= 0.11.4 < 1.0)
+    FParsec (1.1.1)
+      FSharp.Core (>= 4.3.4)
+    FSharp.Core (7.0.300)
+    Mono.Cecil (0.11.5)
+    System.Collections.Immutable (7.0)
+      System.Runtime.CompilerServices.Unsafe (>= 6.0)
+    System.Runtime.CompilerServices.Unsafe (6.0)
+    YoloDev.Expecto.TestSdk (0.14)
+      Expecto (>= 10.0 < 11.0)
+      FSharp.Core (>= 7.0.200)
+      System.Collections.Immutable (>= 6.0)
