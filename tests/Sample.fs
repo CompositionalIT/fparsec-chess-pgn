@@ -17,7 +17,7 @@ let tests =
                 Name = "Event"
                 Value = "F/S Return Match"
             }
-            Expect.equal (tryParse Parse.tag "[Event \"F/S Return Match\"]") (Some expectedTag) ""
+            Expect.equal (tryParse Parse.tag "[Event   \"F/S Return Match\"]") (Some expectedTag) ""
         )
         testCase "Multi digit round number" (fun _ ->
             Expect.equal (tryParse Parse.roundNumber "12. e4") (Some 12) ""
@@ -102,8 +102,8 @@ let tests =
 [Tag1 "Value 1"]
 [Tag2 "Value 2"]
 
-9. d8 Rf1 10. d4 Nd7
-11. c4 Qc6
+9. d8 Rf1 10. d4
+Nd7 11. c4 Qc6
             """
             Expect.equal (tryParse Parse.game (text.Trim())) (Some expected) ""
         )

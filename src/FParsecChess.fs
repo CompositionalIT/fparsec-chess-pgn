@@ -55,12 +55,11 @@ type Game = {
 module Parse =
     open FParsec
 
-    let space = skipChar ' '
     let doubleQuote = pchar '"'
 
     let tag : Parser<Tag, unit> =
-        pchar '[' >>. many1CharsTill anyChar space .>> doubleQuote .>>. manyCharsTill anyChar doubleQuote .>> pchar ']'
-        >>= (fun (a, b) -> { Name = a; Value = b } |> preturn)
+        pchar '[' >>. many1CharsTill anyChar spaces1 .>> doubleQuote .>>. manyCharsTill anyChar doubleQuote .>> pchar ']'
+        >>= (fun (a, b) -> preturn { Name = a; Value = b })
 
     let period = skipChar '.'
 
@@ -104,10 +103,10 @@ module Parse =
     let move = piece .>>. square >>= (fun (piece, square) -> preturn { Piece = piece; Square = square })
 
     let round =
-        tuple3 (roundNumber .>> space) (move .>> space) move
+        tuple3 (roundNumber .>> spaces1) (move .>> spaces1) move
         >>= (fun (round, move1, move2) -> preturn { RoundNumber = round; WhiteMove = move1; BlackMove = move2 })
 
-    let rounds : Parser<Round list, unit> = sepBy round (choice [ space; skipNewline ])
+    let rounds : Parser<Round list, unit> = sepBy round spaces1
 
     let game =
         sepEndBy tag newline .>> many1 newline .>>. rounds
