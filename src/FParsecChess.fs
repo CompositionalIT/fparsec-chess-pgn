@@ -107,9 +107,9 @@ module Parse =
         tuple3 (roundNumber .>> space) (move .>> space) move
         >>= (fun (round, move1, move2) -> preturn { RoundNumber = round; WhiteMove = move1; BlackMove = move2 })
 
-    let rounds : Parser<Round list, unit> = sepBy round space
+    let rounds : Parser<Round list, unit> = sepBy round (choice [ space; skipNewline ])
 
     let game =
-        sepEndBy tag newline .>> many newline .>>. rounds
+        sepEndBy tag newline .>> many1 newline .>>. rounds
         >>= (fun (tags, rounds) -> preturn { Tags = tags; Rounds = rounds })
 

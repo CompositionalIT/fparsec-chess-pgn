@@ -91,6 +91,11 @@ let tests =
                         WhiteMove = { Piece = Pawn; Square = D, Four }
                         BlackMove = { Piece = Knight; Square = D, Seven }
                     }
+                    {
+                        RoundNumber = 11
+                        WhiteMove = { Piece = Pawn; Square = C, Four }
+                        BlackMove = { Piece = Queen; Square = C, Six }
+                    }
                 ]
             }
             let text = """
@@ -98,6 +103,7 @@ let tests =
 [Tag2 "Value 2"]
 
 9. d8 Rf1 10. d4 Nd7
+11. c4 Qc6
             """
             Expect.equal (tryParse Parse.game (text.Trim())) (Some expected) ""
         )
