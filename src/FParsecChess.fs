@@ -61,9 +61,7 @@ module Parse =
         pchar '[' >>. many1CharsTill anyChar spaces1 .>> doubleQuote .>>. manyCharsTill anyChar doubleQuote .>> pchar ']'
         >>= (fun (a, b) -> preturn { Name = a; Value = b })
 
-    let period = skipChar '.'
-
-    let roundNumber = pint32 .>> period
+    let roundNumber = pint32 .>> skipChar '.'
 
     let file = 
         choice [
